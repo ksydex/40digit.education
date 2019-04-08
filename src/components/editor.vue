@@ -2,60 +2,71 @@
   <v-container fluid>
     <v-layout wrap column>
       <v-layout row>
-        <v-flex  height="500" xs6>
-          <v-textarea
-            fill-width
-            name="input-7-1"
-            box
-            label="Code"
-            auto-grow
-            id="editor_window"
-            placeholder="Yout code here!"
-            v-model="code"
-          ></v-textarea>
+        <v-flex height="600" xs6>
+          <cm :codee="code" @update="updateCode"></cm>
         </v-flex>
         <v-flex xs6 class="ml-3">
           <div v-html="code"></div>
         </v-flex>
       </v-layout>
-      <v-flex>
-        <v-card>
-          <v-card-title primary-title>
-            <div>
-              <h3 class="headline mb-0">{{lesson.title}}</h3>
-              <div v-html="$options.filters.coder(lesson.text)"></div>
-            </div>
-          </v-card-title>
-        </v-card>
-        <v-card
-          class="mt-2"
-          :color="task.status==1 ? 'green':'primary'"
-          v-for="(task,index) in lesson.tasks"
-          :key="index"
-        >
-          <v-card-title>
-            <div>
-              <v-icon>subject</v-icon>
-              <h3 class="headline mb-0 ml-2">{{task.title}}</h3>
-              <div v-html="$options.filters.coder(task.text)"></div>
-            </div>
-          </v-card-title>
-        </v-card>
-        <v-btn v-if="this.$route.params.id !=0">previous</v-btn>
-        <v-btn>next</v-btn>
-      </v-flex>
+      <v-layout row>
+        <v-flex xs6>
+          <v-card>
+            <v-card-title primary-title>
+              <div>
+                <h3 class="headline mb-0">{{lesson.title}}</h3>
+                <div
+                  v-html="$options.filters.coder(lesson.text)"
+                  style="overflow:auto; height: 500px"
+                ></div>
+              </div>
+            </v-card-title>
+          </v-card>
+        </v-flex>
+        <v-flex xs6>
+          <v-card
+            class="mt-2"
+            :color="task.status==1 ? 'green':'primary'"
+            v-for="(task,index) in lesson.tasks"
+            :key="index"
+          >
+            <v-card-title>
+              <div>
+                <div style="display: flex; flex-direction: row; align-items: center">
+                  <v-icon>subject</v-icon>
+                  <h3 class="headline mb-0 ml-2">{{task.title}}</h3>
+                  <v-spacer></v-spacer>
+                    <solution v-show="!task.status" :task_data="$options.filters.coder(task.solution)"></solution>
+
+                </div>
+                
+                <div v-html="$options.filters.coder(task.text)"></div>
+              </div>
+            </v-card-title>
+          </v-card>
+          <v-btn v-if="this.$route.params.id !=0">previous</v-btn>
+          <v-btn>next</v-btn>
+        </v-flex>
+      </v-layout>
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import cm from "./cm.vue";
+import solution from "./solution.vue"
 
 export default {
+  components: {
+    cm,
+    solution
+  },
   data() {
     return {
       code: "<h4>Вы можете писать весь код прямо здесь!</h4>",
       i: 0,
-      lesson: null
+      lesson: null,
+      dialog: false
     };
   },
   methods: {
@@ -68,14 +79,18 @@ export default {
               v.lesson.tasks[i].status = 1;
             else v.lesson.tasks[i].status = 0;
           } else {
-              v.lesson.tasks[i].status = 0;
-                break
-            };
+            v.lesson.tasks[i].status = 0;
+            break;
+          }
       }
+    },
+    updateCode(value) {
+      this.code = value;
     }
   },
   watch: {
-    code() { //tasks checking
+    code() {
+      //tasks checking
       this.isTaskDone();
     }
   },
@@ -91,7 +106,7 @@ export default {
       while ((regex = regexp.exec(value))) {
         //let parsed = regex[1].replace(/</g, "&lt;").replace(/>/g, "&gt;");
         let parsed = regex[1].replace(/<(.+?)>/g, (s, r) => {
-          return r === 'br' ? s : '&lt;' + r + '&gt;';
+          return r === "br" ? s : "&lt;" + r + "&gt;";
         });
         def = def.replace(regex[1], parsed);
       }
