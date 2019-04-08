@@ -1,3 +1,3 @@
-## Educational SPA for 40digit
-# being developed on vue+vuetify
+# Educational SPA for 40digit
+### being developed on vue+vuetify
 
