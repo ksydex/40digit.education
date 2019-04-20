@@ -1,3 +1,4 @@
-# Educational SPA for 40digit
-### being developed on vue+vuetify
+# 40digit.education
+### SPA educational platform for learning hot to code.
+Learning process is divided into a few of levels with increasing difficulty.
 
