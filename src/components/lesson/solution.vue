@@ -2,13 +2,13 @@
   <div class="text-xs-center">
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on }">
-        <v-btn color="red lighten-2" flat v-on="on">Показать решение</v-btn>
+        <v-btn color="white lighten-2" flat v-on="on">решение</v-btn>
       </template>
 
       <v-card>
-        <v-card-title class="headline primary lighten-2" primary-title>Возможное решение</v-card-title>
+        <v-card-title class="headline primary text" primary-title>Возможное решение</v-card-title>
 
-        <v-card-text v-html="solution"></v-card-text>
+        <v-card-text class="code" v-html="solution"></v-card-text>
 
         <v-divider></v-divider>
 
@@ -33,4 +33,12 @@ export default {
 }
 </script>
 
+<style scoped>
+.text {
+  font-family: "Rubik", sans-serif !important;
+}
+.code{
+  user-select: none !important;
+}
+</style>
 

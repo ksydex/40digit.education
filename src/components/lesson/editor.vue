@@ -11,42 +11,41 @@
       </v-layout>
       <v-layout row>
         <v-flex xs6 class="mt-3">
-          <v-card>
+          <v-card class="lesson_text">
             <v-card-title primary-title class="pt-2">
               <div>
                 <div class="my-0" style="display: flex; flex-direction: row; align-items: center">
-                    <h3 class="headline mb-0">{{lesson.title}}</h3>
+                    <h3 class="rubik headline mb-0">{{lesson.title}}</h3>
                     <v-spacer></v-spacer>
                     <v-btn flat icon v-if="this.$route.params.id !=0">back</v-btn>
                     <v-btn flat class="mx-0" disabled>Следующий урок</v-btn>
                   </div>
                 
 
-                <div
+                <div class="lesson_text__content"
                   v-html="$options.filters.coder(lesson.text)"
-                  style="overflow:auto; height: 500px"
                 ></div>
               </div>
             </v-card-title>
           </v-card>
         </v-flex>
         <v-flex xs6 class="ml-3 mt-3">
-          <v-card
-          class="mb-2"
+          <v-card 
+          class="task mb-2"
             :color="task.status==1 ? 'green':'primary'"
             v-for="(task,index) in lesson.tasks"
             :key="index"
           >
-            <v-card-title class="pt-2">
+            <v-card-title class="pa-0">
               <div style="width: 100%">
-                <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-beetween">
-                  <v-icon>subject</v-icon>
-                  <h3 class="headline mb-0 ml-2">{{task.title}}</h3>
+                <div class="task_top ml-2">
+                  <v-icon>{{ task.status ? 'check' : 'subject' }}</v-icon>
+                  <h3 class="rubik task_top__title mb-0 ml-2">{{task.title}}</h3>
                   <v-spacer></v-spacer>
                   <solution v-show="!task.status" :task_data="$options.filters.coder(task.solution)"></solution>
                 </div>
                 
-                <div v-html="$options.filters.coder(task.text)"></div>
+                <div class="mx-3 mb-3" v-html="$options.filters.coder(task.text)"></div>
               </div>
             </v-card-title>
           </v-card>
@@ -123,9 +122,40 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 #editor_window {
   width: 100% !important;
   height: 100% !important;
+}
+
+.task {
+  .task_top{
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: space-beetween;
+    height: 50px;
+    .task_top__title {
+      font-weight: 400;
+      font-size: 18px;
+    }
+  }
+
+  .tip {
+    margin: 5px -10px 5px -10px;
+    padding: 5px 10px 5px 10px;
+    background-color: #0000001e;
+    border-radius: 2px;
+    font-style: italic;
+    border-left: 5px solid #ffffffc0;
+  }
+
+}
+
+.lesson_text {
+  .lesson_text__content{
+    height: 500px;
+    overflow: auto;
+  }
 }
 </style>

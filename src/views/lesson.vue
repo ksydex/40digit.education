@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import editor from '../components/editor.vue'
+import editor from '../components/lesson/editor.vue'
 
   export default {
     components: {
@@ -11,3 +11,9 @@ import editor from '../components/editor.vue'
     }
   }
 </script>
+
+<style scoped>
+  html {
+    overflow: scroll;
+  }
+</style>

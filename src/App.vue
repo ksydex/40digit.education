@@ -347,7 +347,6 @@ export default {
     }
     margin-left: -30px;
   }
-
   .logo {
     margin-left: -40px;
   }
