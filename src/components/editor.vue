@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="ma-0 pa-2">
     <v-layout wrap column>
       <v-layout row>
         <v-flex height="600" xs6>
@@ -10,11 +10,18 @@
         </v-flex>
       </v-layout>
       <v-layout row>
-        <v-flex xs6>
+        <v-flex xs6 class="mt-3">
           <v-card>
-            <v-card-title primary-title>
+            <v-card-title primary-title class="pt-2">
               <div>
-                <h3 class="headline mb-0">{{lesson.title}}</h3>
+                <div class="my-0" style="display: flex; flex-direction: row; align-items: center">
+                    <h3 class="headline mb-0">{{lesson.title}}</h3>
+                    <v-spacer></v-spacer>
+                    <v-btn flat icon v-if="this.$route.params.id !=0">back</v-btn>
+                    <v-btn flat class="mx-0" disabled>Следующий урок</v-btn>
+                  </div>
+                
+
                 <div
                   v-html="$options.filters.coder(lesson.text)"
                   style="overflow:auto; height: 500px"
@@ -23,29 +30,27 @@
             </v-card-title>
           </v-card>
         </v-flex>
-        <v-flex xs6>
+        <v-flex xs6 class="ml-3 mt-3">
           <v-card
-            class="mt-2"
+          class="mb-2"
             :color="task.status==1 ? 'green':'primary'"
             v-for="(task,index) in lesson.tasks"
             :key="index"
           >
-            <v-card-title>
-              <div>
-                <div style="display: flex; flex-direction: row; align-items: center">
+            <v-card-title class="pt-2">
+              <div style="width: 100%">
+                <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-beetween">
                   <v-icon>subject</v-icon>
                   <h3 class="headline mb-0 ml-2">{{task.title}}</h3>
                   <v-spacer></v-spacer>
-                    <solution v-show="!task.status" :task_data="$options.filters.coder(task.solution)"></solution>
-
+                  <solution v-show="!task.status" :task_data="$options.filters.coder(task.solution)"></solution>
                 </div>
                 
                 <div v-html="$options.filters.coder(task.text)"></div>
               </div>
             </v-card-title>
           </v-card>
-          <v-btn v-if="this.$route.params.id !=0">previous</v-btn>
-          <v-btn>next</v-btn>
+          
         </v-flex>
       </v-layout>
     </v-layout>
@@ -96,7 +101,9 @@ export default {
   },
   computed: {},
   created() {
-    this.lesson = this.$store.getters.getLesson(this.$route.params.id);
+    let language = this.$route.path.split('/')[1];
+    var params = {id: this.$route.params.id, lang: language}
+    this.lesson = this.$store.getters.getLesson(params);
   },
   filters: {
     coder: function(value) {

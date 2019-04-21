@@ -16,13 +16,14 @@ export default new Router({
       path:'/',
       name: 'home',
       component: home,
-      alias: '/home'
+      alias: '/home',
+      title: '40digit education'
     },
     {
       path: '/:lang',
       props: true,
       name: 'course_page',
-      component: course_page
+      component: course_page,
     },
     {
       path: '/:lang/lesson/:id',

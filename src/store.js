@@ -74,7 +74,33 @@ export default new Vuex.Store({
             "Магическим образом превращает набор элементов в красивый, полноценный сайт. Благодаря CSS есть такое разнообразие интерфейсов.",
           status: false,
           img: "https://smm.pp.ua/wp-content/uploads/2017/09/css_code-min.jpg"
-        }
+        },
+        lessons: [
+          {
+            title: "CSS - это красиво",
+            text:
+              'Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language like HTML.[1] CSS is a cornerstone technology of the World Wide Web, alongside HTML and JavaScript.[2]',
+              status: true,
+            tasks: [
+              {
+                title: "Hello, world!",
+                text:
+                  'По традиции, каждый крутой программист вначале своего пути должен написать ',
+                exp: [/<p>\s{0,}Hello.{1}\s{1,}World!\s{0,}<\Wp>/i],
+                status: 0,
+                solution: "<code><p>Hello, world!</p></code>"
+              },
+              {
+                title: "Заголовки",
+                text:
+                  'Создайте заголовки <code><h1></code>,<code><h2></code>,<code><h3></code> с любым текстом внутри.',
+                exp: [/<h1>.{0,}<\/h1>/i,/<h2>.{0,}<\/h2>/i,/<h3>.{0,}<\/h3>/i],
+                status: 0,
+                solution: "<code><h1>Заголовок первого уровня</h1><br><h2>Заголовок второго уровня</h2><br><h3>Заголовок третьего уровня</h3></code>"
+              }
+            ]
+          },
+        ]
       },
       js: {
         card: {
@@ -91,8 +117,9 @@ export default new Vuex.Store({
   },
   getters: {
     //почти computed, Только для store
-    getLesson: state => id => {
-      return state.courses.html.lessons[id];
+    getLesson: state => params => {
+      
+      return state.courses[params.lang].lessons[params.id];
     },
     getCourse: state => lang => {
       return state.courses[lang];

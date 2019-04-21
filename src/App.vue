@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
-    <v-toolbar app>
-      <v-toolbar-title height="150">
+    <v-toolbar height="50px" flat app>
+      <v-toolbar-title>
         <router-link to="/">
           <svg width="331" class="logo" height="38" style="transform: scale(0.7)" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path

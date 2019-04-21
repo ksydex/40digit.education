@@ -25,7 +25,6 @@
       </div>
     </v-layout>
   </v-parallax>
-  <h1 style="text-align: center">Уроки</h1>
   <v-layout align-start mt-3 justify-center row fill-height>
       <v-card align-content-space-around  height="300"
       :to="lesson.status ? {name: 'lesson', params: {id: index}} : ''"
