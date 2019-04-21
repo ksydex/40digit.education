@@ -5,7 +5,7 @@
         <v-flex height="600" xs6>
           <cm :codee="code" @update="updateCode"></cm>
         </v-flex>
-        <v-flex xs6 class="ml-3">
+        <v-flex xs6 class="ml-3" style="overflow: auto !important; height: 300px">
           <div v-html="code"></div>
         </v-flex>
       </v-layout>
@@ -103,6 +103,7 @@ export default {
     let language = this.$route.path.split('/')[1];
     var params = {id: this.$route.params.id, lang: language}
     this.lesson = this.$store.getters.getLesson(params);
+    this.isTaskDone();
   },
   filters: {
     coder: function(value) {
@@ -156,6 +157,10 @@ export default {
   .lesson_text__content{
     height: 500px;
     overflow: auto;
+    h1,h2,h3,h4,h5,h6 {
+      font-family: 'Tinos', serif;
+      font-weight: 500;
+    }
   }
 }
 </style>
