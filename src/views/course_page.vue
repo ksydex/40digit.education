@@ -10,7 +10,7 @@
       column
       justify-center
     >
-      <h1 class="display-2 font-weight-thin mb-3">{{data.card.title}}</h1>
+      <h1 class="serif display-2 font-weight-thin mb-3">{{data.card.title}}</h1>
       <h4 class="subheading" v-html="data.card.desc"></h4>
       <div class="course_info" >
         <span class="course_info__item">
@@ -30,11 +30,10 @@
       :to="lesson.status ? {name: 'lesson', params: {id: index}} : ''"
       fill-height width="250" class="mr-3 topic_card" light 
       v-for="(lesson,index) in data.lessons" :key="index">
-        <!-- <v-img :src="card.img" aspect-ratio="1.7"></v-img> -->
-        <v-card-title class="pb-0">
+        <v-card-title class="pb-0 pt-2">
           <div>
-            <h3 class="headline">{{(index+1)+'. '+lesson.title}}</h3>
-            <div class="my-2 ml-2" v-html="lesson.text.substr(0,170) + '...'"></div>
+            <h3 class="sans-serif headline" style="font-weight: 500">{{(index+1)+'. '+lesson.title}}</h3>
+            <div class="my-2 ml-2" v-html="lesson.preview_text"></div>
           </div>
         </v-card-title>
         <div class="bottom_acts">

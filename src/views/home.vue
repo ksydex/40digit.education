@@ -30,9 +30,9 @@
       v-for="(card,index) in cards" :key="index">
         <v-img :src="card.img" aspect-ratio="1.7"></v-img>
 
-        <v-card-title class="pb-0">
+        <v-card-title class="pb-0 pt-2">
           <div>
-            <h3 class="headline">{{card.title}}</h3>
+            <h3 class="sans-serif headline pb-1" style="font-weight: 500">{{card.title}}</h3>
             <div class="mb-0" v-html="card.desc"></div>
           </div>
         </v-card-title>

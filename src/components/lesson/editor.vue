@@ -15,7 +15,7 @@
             <v-card-title primary-title class="pt-2">
               <div>
                 <div class="my-0" style="display: flex; flex-direction: row; align-items: center">
-                    <h3 class="rubik headline mb-0">{{lesson.title}}</h3>
+                    <h3 class="sans-serif headline mb-0">{{lesson.title}}</h3>
                     <v-spacer></v-spacer>
                     <v-btn flat icon v-if="this.$route.params.id !=0">back</v-btn>
                     <v-btn flat class="mx-0" disabled>Следующий урок</v-btn>
@@ -40,7 +40,7 @@
               <div style="width: 100%">
                 <div class="task_top ml-2">
                   <v-icon>{{ task.status ? 'check' : 'subject' }}</v-icon>
-                  <h3 class="rubik task_top__title mb-0 ml-2">{{task.title}}</h3>
+                  <h3 class="sans-serif task_top__title mb-0 ml-2">{{task.title}}</h3>
                   <v-spacer></v-spacer>
                   <solution v-show="!task.status" :task_data="$options.filters.coder(task.solution)"></solution>
                 </div>
@@ -67,7 +67,7 @@ export default {
   },
   data() {
     return {
-      code: "<h4>Вы можете писать весь код прямо здесь!</h4>",
+      code: '<h1 class="serif">Вы можете писать весь код прямо здесь!</h1>',
       i: 0,
       lesson: null,
       dialog: false
@@ -158,7 +158,7 @@ export default {
     height: 500px;
     overflow: auto;
     h1,h2,h3,h4,h5,h6 {
-      font-family: 'Tinos', serif;
+      font-family: 'Playfair Display', serif !important;
       font-weight: 500;
     }
   }
