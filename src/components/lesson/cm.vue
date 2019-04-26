@@ -12,6 +12,7 @@
 // require component
 import { codemirror } from 'vue-codemirror'
 
+
 // require styles
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/lucario.css'
@@ -40,10 +41,10 @@ export default {
   },
   methods: {
     onCmReady(cm) {
-      console.log('the editor is readied!', cm)
+      //console.log('the editor is readied!', cm)
     },
     onCmFocus(cm) {
-      console.log('the editor is focus!', cm)
+      //console.log('the editor is focus!', cm)
     },
     onCmCodeChange(newCode) {
       this.$emit('update',newCode);
@@ -55,7 +56,7 @@ export default {
     }
   },
   mounted() {
-    console.log('this is current codemirror object', this.codemirror)
+    //console.log('this is current codemirror object', this.codemirror)
     // you can use this.codemirror to do something...
   },
   created() {
@@ -63,3 +64,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.CodeMirror-code {
+  font-size: 14px;
+  span {
+    font-family: 'Fira Code', monospace !important;
+  }
+}
+</style>

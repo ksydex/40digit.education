@@ -3,7 +3,14 @@
     <v-toolbar height="50px" flat app>
       <v-toolbar-title>
         <router-link to="/">
-          <svg width="331" class="logo" height="38" style="transform: scale(0.7)" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            width="331"
+            class="logo"
+            height="38"
+            style="transform: scale(0.7)"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M34.963 29.32c-3.493 0-6.24-1.32-8.24-3.96-1.973-2.667-2.96-6.2-2.96-10.6 0-4.4.987-7.92 2.96-10.56 2-2.667 4.747-4 8.24-4 3.52 0 6.267 1.333 8.24 4 1.973 2.64 2.96 6.16 2.96 10.56s-.986 7.933-2.96 10.6c-1.973 2.64-4.72 3.96-8.24 3.96zm-4.24-7.72c.96 1.547 2.373 2.32 4.24 2.32s3.28-.787 4.24-2.36c.987-1.573 1.48-3.84 1.48-6.8 0-2.987-.493-5.267-1.48-6.84-.96-1.573-2.373-2.36-4.24-2.36s-3.28.787-4.24 2.36c-.96 1.573-1.44 3.853-1.44 6.84 0 2.987.48 5.267 1.44 6.84z"
               fill="url(#paint0_linear)"
@@ -288,29 +295,31 @@
           <v-icon>chevron_right</v-icon>
         </template>
         <template v-slot:item="props">
-          <router-link tag="a" :class="props.item.name == items[items.length-1].name ? 'current' : ''" :to="props.item.href">{{ props.item.name.toUpperCase() }}</router-link>
+          <router-link
+            tag="a"
+            :class="props.item.name == items[items.length-1].name ? 'current' : ''"
+            :to="props.item.href"
+          >{{ props.item.name.toUpperCase() }}</router-link>
         </template>
       </v-breadcrumbs>
       <v-spacer></v-spacer>
       <v-btn flat target="_blank" v-show="this.$route.name != 'home'">
-        <router-link  class="home_link" :to="{name: 'home'}" tag="span">Главная</router-link>
+        <router-link class="home_link" :to="{name: 'home'}" tag="span">Главная</router-link>
       </v-btn>
     </v-toolbar>
 
     <v-content>
-      <router-view></router-view>
+      <router-view ref="editor"></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import { types } from 'util';
+import { types } from "util";
 
 export default {
   name: "App",
-  components: {
-    
-  },
+  components: {},
   data() {
     return {
       //
@@ -319,19 +328,27 @@ export default {
   computed: {
     items() {
       let crumbs_n = [];
-      let crumbs = this.$route.path.split('/'); 
-      crumbs = crumbs.filter((value, index, crumbs)=>{
-        return value!="" && value!="lesson"
+      let crumbs = this.$route.path.split("/");
+      crumbs = crumbs.filter((value, index, crumbs) => {
+        return value != "" && value != "lesson";
       });
       //crumbs[1] = this.$store.state.courses.html.lessons[0].title;
-      if(crumbs[1]!= null){
-        let num = parseInt(crumbs[1])+1;
-        crumbs[1] = "Урок " + num + ": "+ this.$store.state.courses[crumbs[0]].lessons[parseInt(crumbs[1])].title;
+      if (crumbs[1] != null) {
+        let num = parseInt(crumbs[1]) + 1;
+        crumbs[1] =
+          "Урок " +
+          num +
+          ": " +
+          this.$store.state.courses[crumbs[0]].lessons[parseInt(crumbs[1])]
+            .title;
       }
-      if(crumbs[0]!=null)
+      if (crumbs[0] != null)
         crumbs[0] = this.$store.state.courses[crumbs[0]].card.title;
       crumbs.forEach(element => {
-        crumbs_n.push({name: element, href: element != crumbs[1] ? '/' + this.$route.path.split('/')[1]: ''})
+        crumbs_n.push({
+          name: element,
+          href: element != crumbs[1] ? "/" + this.$route.path.split("/")[1] : ""
+        });
       });
       return crumbs_n;
     }
@@ -340,35 +357,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #breadcrumbs {
-    a {
-      text-decoration: none;
-      color: #ffffff;
-    }
-    margin-left: -30px;
+#breadcrumbs {
+  a {
+    text-decoration: none;
+    color: #ffffff;
   }
-  .logo {
-    margin-left: -40px;
+  margin-left: -30px;
+}
+.logo {
+  margin-left: -40px;
+}
+.current {
+  color: #ffffff79 !important;
+}
+.v-toolbar__title {
+  display: flex !important;
+
+  a {
+    display: flex;
   }
-  .current{
-    color: #ffffff79 !important;
-  }
-  .v-toolbar__title {
-    display: flex !important;
-    
-    a {
-      display: flex;
-    }
-  }
-  .home_link {
-    margin: -10px;
-    padding: 10px;
-  }
-  .slide-fade-enter-active {
-  transition: all .3s ease;
+}
+.home_link {
+  margin: -10px;
+  padding: 10px;
+}
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
 }
 .slide-fade-leave-active {
-  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active below version 2.1.8 */ {
